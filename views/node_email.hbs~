@@ -1,0 +1,12 @@
+<html>
+<title>
+Node Mail Try
+</title>
+<body>
+
+<form method="post" action="mail">
+<input type="text" id="email" name="email" placeholder="Enter your email">
+<input type="submit" id="button" value="send"/>
+</form>
+</body>
+</html> 

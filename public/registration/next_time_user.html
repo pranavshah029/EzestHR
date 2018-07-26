@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>e-Zest Guest Portal</title>
+  <link rel="shortcut icon" href="https://www.e-zest.com/hubfs/images/sitefavicon.ico?t=1531735061240">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,700,300'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#id_no").hide();
+			$("#err_name").hide();
+			$("#err_email").hide();
+			$("#err_number").hide();
+            $('#err_reason').hide();
+            $('#err_whom').hide();
+
+		
+  $('#username').focusout(function(){
+				ValidateName();
+				
+			});
+			$('#username').focusin(function(){
+				$("#err_name").hide();
+				
+			});
+
+			$('#contact').focusout(function(){
+				ValidatePhone();
+			});
+			$('#contact').focusin(function(){
+				$("#err_number").hide();
+			});
+
+			$('#email').focusout(function(){
+			      ValidateEmail();
+			});
+			$('#email').focusin(function(){
+				$("#err_email").hide();
+			});
+
+             $('#reason').focusin(function(){
+				$("#err_reason").hide();
+			});
+              $('#reason').focusout(function(){
+                validate_reason();
+        	});
+
+            $('#whom').focusin(function(){
+				$("#err_whom").hide();
+			});
+            $('#whom').focusout(function(){
+                validate_whom();
+        	});
+
+
+
+});
+
+   
+
+
+  </script>
+
+</head>
+
+<body>
+
+  <div class="signup__container">
+  <div class="container__child signup__thumbnail">
+    <div class="thumbnail__logo">
+      <svg class="logo__shape" width="25px" viewBox="0 0 634 479" xmlns="http://www.w3.org/2000/svg">
+        <g><img src="https://www.e-zest.com/hubfs/E-Zest_Images/128X128-pxl.png?t=1531380481753" width="30" height="35" position="absolute">
+      <h1 class="logo__text">e-Zest</h1>
+    </div>
+    <div class="thumbnail__content text-center">
+      <h1 class="heading--primary" >Welcome to e-Zest</h1>
+      <h2 class="heading--secondary">Are you ready to join the elite?</h2>
+    </div>
+    <div class="thumbnail__links">
+      <ul class="list-inline m-b-0 text-center">
+        <li><a href="https://www.e-zest.com/" target="_blank"><i class="fa fa-globe"></i></a></li>
+        <li><a href="https://www.facebook.com/eZest/" target="_blank"><fa class="fa fa-facebook"></fa></a></li>
+        <li><a href="https://www.instagram.com/ezestsolutions/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="https://twitter.com/ezest" target="_blank"><i class="fa fa-twitter"></i></a></li>
+      </ul>
+    </div>
+    <div class="signup__overlay"></div>
+  </div>
+  <div class="container__child signup__form">
+    <div class="scrollbar scrollbar-primary">
+      <div class="force-overflow"></div>
+
+    <form action="#">
+      
+      <div class="form-group">
+        <label for="contact">Contact Number</label>
+        <input class="form-control" type="tel" name="contact" id="contact" placeholder="Enter 10 digit mobile number" size="10" required />
+        <p id="err_number" style="color:orangered;">Invalid contact</p>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="reason">Reason to Visit</label>
+        <input class="form-control" type="text" name="reason" id="reason" placeholder="Interview / Meeting " required />
+        <p id="err_reason" style="color:orangered;">Please enter purpose of visit</p>
+      </div>
+      <div class="form-group">
+        <label for="whom">Contact Person</label>
+        <input class="form-control" type="text" name="whom" id="whom" placeholder="Name of person to visit" required />
+        <p id="err_whom" style="color:orangered;">Kindly enter whom you want to visit</p>
+      </div>            
+      
+      <div class="m-t-lg">
+        <ul class="list-inline">
+          <li>
+            <input class="btn btn--form" type="submit" value="Enter" onclick="Validate()">
+          </li>
+         
+        </ul>
+      </div>
+    </form>  
+  </div>
+  </div>
+</div>
+  
+  
+
+</body>
+<script type="text/javascript">
+function Validate()
+{
+    if(
+   
+   ValidatePhone()==true &&
+   
+   validate_reason()==true &&
+   validate_whom() ==true){
+    
+     //redirect to server
+   }
+   
+}  
+function ValidatePhone()
+{
+  var phone=document.getElementById("contact");
+  var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  if(phone.value.match(phoneno))
+        {
+         
+      return true;
+        }
+      else
+        {
+          $("#err_number").show();
+        return false;
+        }
+}
+
+function validate_reason(){
+  var reason=$('#reason').val();
+   if(reason !=''){
+     return true;
+   }
+   else{
+    $("#err_reason").show();
+     return false
+   }
+ }     
+
+ function validate_whom(){
+  var whom=$('#whom').val();
+   if(whom !=''){
+     return true;
+   }
+   else{
+    $("#err_whom").show();
+     return false
+   }
+ }
+
+
+
+</script>
+
+</html>
