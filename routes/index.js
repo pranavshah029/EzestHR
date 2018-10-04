@@ -79,6 +79,8 @@ var nodemailer = require('nodemailer');
 var recipient = req.body.email;
 console.log(recipient);
 
+
+//Module for sending mails to the users for login
 var transporter = nodemailer.createTransport({
 service: 'gmail',
 auth: {
@@ -104,6 +106,8 @@ console.log('Email sent: ' + info.response);
 
 });
 
+
+//Checking for valid user by comparing phone numbers
 router.post('/login_check', function(req, res, next) {
   var mob=req.body.contact;
   var mysql = require('mysql');
@@ -302,6 +306,8 @@ router.post('/get_data', function(req, res, next) {
          res.write('<form method="post"><input type="button" align="center" class="btn" onclick="hide_init()" value="Apply Filters"></form>');
          res.write('</select>');*/
 
+
+          //Displaying admin page over here
          res.write('<html><head><script type="text/javascript"> function id_no_show(){ $("#id_no").show(); } function validate_reason(){ var reason=$("#reason").val(); if(reason !=""){ return true; } else{ $("#err_reason").show(); return false } }</script><style> ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: orangered; width:auto;}li { float: left; }li a, .dropbtn { display: inline-block; color: black; text-align: center; padding: 14px 16px; text-decoration: none; font-family: Trebuchet MS; } li a:hover, .dropdown:hover .dropbtn { background-color: red; }li.dropdown { display: inline-block; }.dropdown-content { display: none; position: absolute; background-color: #F9F9F9 ; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; }.dropdown-content a { color: black; padding: 12px 16px; text-decoration: none; display: block; text-align: left;}.dropdown-content a:hover {background-color:grey;}.dropdown:hover .dropdown-content { display: block; } </style></head><body><ul><li><a href="/">Home</a></li><li><form action="chk_feedback" method="post"><button value="view_feedback">Check Feedback</button></form></li><li class="dropdown"></li><li><form action="final_filter" method="post"><select class="dropbtn"  name="uid" id="uid"><option selected="Select Type of Filter" disabled>Select Filter type</option><option value="Name">Name</option><option value="Reason" >Reason</option></select></li><li><input type="textbox" id="filter_cat" name="filter_cat" size="20" style="height:42px;, font-family:Trebuchet MS" placeholder="Search here"></li><li><button onclick="hide_init()">Apply filters</button></form></li><li><a href="/">Logout</a></li></ul>');
 
 
@@ -352,6 +358,8 @@ router.post('/get_data', function(req, res, next) {
 });
 });
 
+
+//Givinf search facility to the admin page to search entries by name or by reason of visit
 router.post('/final_filter', function(req, res, next) {
   console.log("filtering out");
   var by=req.body.uid;
@@ -463,6 +471,8 @@ router.get('/feedback', function(req, res, next) {
   res.render('feedback');
   req.session.errors = null;
 });
+
+//Displaying feedback to the administrator
 
 router.post('/chk_feedback', function(req, res, next) {
   var mysql = require('mysql');
